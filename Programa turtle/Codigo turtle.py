@@ -1,41 +1,42 @@
-#ANTONIO LISBOA DE CARVALHO  535865 
-#JOGO FUP- IVO78
 import turtle
 import random
+
 def personagem():
-
-    def nort():
+    def para_cima():
         if character.ycor() <= 180:
-            character.goto(character.xcor(), character.ycor() + 10)
+            character.sety(character.ycor() + 20)
 
-    def sul():
+    def para_baixo():
         if character.ycor() >= -275:
-            character.goto(character.xcor(), character.ycor() - 10)
+            character.sety(character.ycor() - 20)
 
-    def oeste():
-        character.shape("shapes\garry.gif")
+    def para_esquerda():
+        character.shape("shapes/garry.gif")
         if character.xcor() >= -230:
-            character.goto(character.xcor() - 10, character.ycor())
+            character.setx(character.xcor() - 20)
 
-    def leste():
-        character.shape("shapes\garry2.gif")
+    def para_direita():
+        character.shape("shapes/garry2.gif")
         if character.xcor() <= 230:
-            character.goto(character.xcor() + 10, character.ycor())
+            character.setx(character.xcor() + 20)
 
-    def Key():
-        # PLAYER comandos de entrada
-        turtle.onkeypress(nort, 'Up')
-        turtle.onkeypress(sul, 'Down')
-        turtle.onkeypress(oeste, 'Left')
-        turtle.onkeypress(leste, 'Right')
-        turtle.listen()
-    return Key()
+    def teclas():
+        # Comandos de entrada do jogador
+        screen.onkeypress(para_cima, 'w')
+        screen.onkeypress(para_baixo, 's')
+        screen.onkeypress(para_esquerda, 'a')
+        screen.onkeypress(para_direita, 'd')
+        screen.listen()
+
+    return teclas()
+
 def quadrado():
     arena = turtle.Turtle()
     arena.speed(0)
     arena.penup()
     arena.hideturtle()
-    arena.setx(-250), arena.sety(200)
+    arena.setx(-250)
+    arena.sety(200)
     arena.pendown()
 
     # Criar quadrado
@@ -43,6 +44,7 @@ def quadrado():
         arena.forward(500)
         arena.right(90)
     arena.isvisible()
+
 def veneno():
     global vidas
     pontos.forward(v)
@@ -64,6 +66,7 @@ def veneno():
         pontos.speed(0)
         pontos.goto(random.randint(-250, 250), random.randint(-200, 200))
         pontos.left(random.randint(1, 360))
+
 def comida1():
     global v
     global score
@@ -100,78 +103,80 @@ def comida1():
         comida.left(random.randint(1, 360))
         sketch.clear()
         sketch.write(f"PONTUACAO : {score}    V = {v*10}         total : {total}", align="center", font=("Courier", 24, "normal"))
-#register shapes
-turtle.register_shape("shapes\garry.gif")
-turtle.register_shape("shapes\garry2.gif")
-turtle.register_shape("shapes\cviva.gif")
-turtle.register_shape("shapes\casa.gif")
-turtle.register_shape("shapes\comida.gif")
-turtle.register_shape("shapes\cfundo.gif")
 
-#variaveis
+# Registrar shapes
+turtle.register_shape("shapes/garry.gif")
+turtle.register_shape("shapes/garry2.gif")
+turtle.register_shape("shapes/cviva.gif")
+turtle.register_shape("shapes/casa.gif")
+turtle.register_shape("shapes/comida.gif")
+turtle.register_shape("shapes/cfundo.gif")
+
+# Variáveis
 v = 0.1
 vidas = 0
 quadrado()
 velocidade = 0
 
-#Janela
+# Janela
 screen = turtle.Screen()
-screen.bgpic("shapes\cfundo.gif")
+screen.bgpic("shapes/cfundo.gif")
 screen.tracer()
 screen.bgcolor()
 screen.title('LISBOA')
 screen.setup(width=1000, height=700)
 
-#personagem
+# Personagem
 character = turtle.Turtle()
-character.shape("shapes\garry.gif")
+character.shape("shapes/garry.gif")
 character.up()
-character.speed(1)
+character.speed(2)  # Ajustar a velocidade aqui para 2
 character.setheading(90)
-#vidas
+
+# Vidas
 vida1 = turtle.Turtle()
-vida1.shape("shapes\casa.gif")
+vida1.shape("shapes/casa.gif")
 vida1.up()
 vida1.speed(0)
 vida1.color("red")
-vida1.goto(-180,250)
+vida1.goto(-180, 250)
 vida1.setheading(90)
 
 vida2 = turtle.Turtle()
-vida2.shape("shapes\casa.gif")
+vida2.shape("shapes/casa.gif")
 vida2.up()
 vida2.speed(0)
 vida2.color("red")
-vida2.goto(-205,250)
+vida2.goto(-205, 250)
 vida2.setheading(90)
 
 vida3 = turtle.Turtle()
-vida3.shape("shapes\casa.gif")
+vida3.shape("shapes/casa.gif")
 vida3.up()
 vida3.speed(0)
 vida3.color("red")
-vida3.goto(-230,250)
+vida3.goto(-230, 250)
 vida3.setheading(90)
 
-#veneno
+# Veneno
 pontos = turtle.Turtle()
-pontos.shape("shapes\cviva.gif")
-
+pontos.shape("shapes/cviva.gif")
 pontos.up()
 pontos.speed(0)
-pontos.sety(random.randint(-299, 199)), pontos.setx(random.randint(-249, 249))
+pontos.sety(random.randint(-299, 199))
+pontos.setx(random.randint(-249, 249))
 pontos.setheading(random.randint(1, 360))
 
-
-#comida
+# Comida
 comida = turtle.Turtle()
-comida.shape("shapes\comida.gif")
+comida.shape("shapes/comida.gif")
 comida.up()
 comida.speed(0)
-comida.sety(random.randint(-299, 199)), pontos.setx(random.randint(-249, 249))
+comida.sety(random.randint(-299, 199))
+comida.setx(random.randint(-249, 249))
 comida.setheading(random.randint(1, 360))
 
-#score
+# Pontuação
 total = 0
 sketch = turtle.Turtle()
 score = 0
@@ -182,8 +187,8 @@ sketch.hideturtle()
 sketch.goto(0, 260)
 sketch.write(f"PONTUACAO : {score}    V = {v*10}         total : {total}", align="center", font=("Courier", 24, "normal"))
 
-
 screen.tracer(0)
+
 while True:
     screen.update()
     veneno()
